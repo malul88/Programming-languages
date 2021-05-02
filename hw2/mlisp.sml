@@ -1,0 +1,2 @@
+execption Undefined;
+execption Empty;

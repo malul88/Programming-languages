@@ -44,7 +44,7 @@ hlp1low(“”,s,0)
 end;
 
 
-fun countOccurrs (s,c)= 
+fun countOccurrs (s,c)=
   let
     fun counter n =
       let
@@ -61,3 +61,39 @@ fun countOccurrs (s,c)=
 fun areAnagrams (s1,s2)= (getAllOccurrs(s1) = getAllOccurrs(s2)w);
 
 /* part3 */
+
+exception Undefined;
+exception Empty;
+
+fun initEnv () (s:string)= raise Undefined;
+
+
+fun define (s:string) f a = fn str => if str=s then a
+                      else f(str);
+
+fun emptyNestedEnv () = [initEnv ()];
+
+fun pushEnv a list = a::list;
+
+fun popEnv list = tl list;
+
+fun topEnv list = hd list;
+
+fun defineNested s list a =
+  let
+    val env = topEnv(list)
+    val env = define s env a
+    val list = popEnv list
+  in
+    pushEnv env list
+  end;
+
+fun find s [] = raise Undefined
+  | find s list =
+  let
+   val env = topEnv(list)
+   val tail = popEnv(list)
+  in
+    env s
+    handle Undefined => find s tail
+  end;

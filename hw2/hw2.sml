@@ -88,7 +88,7 @@ fun defineNested s list a =
     pushEnv env list
   end;
 
-fun find s [] = raise Undefined
+fun find (s:string) [] = raise Empty
   | find s list =
   let
    val env = topEnv(list)
@@ -96,4 +96,5 @@ fun find s [] = raise Undefined
   in
     env s
     handle Undefined => find s tail
+    handle Empty => raise Undefined
   end;

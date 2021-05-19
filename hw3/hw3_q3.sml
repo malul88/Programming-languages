@@ -1,7 +1,7 @@
 /* Michael Malul 316153865 michaelmalul@campus.technion.ac.il
    Omer Gino 205416209 omergino@campus.technion.ac.il */
 
-/* Part 1 */
+(* Part 1 *)
 
 datatype 'a AVLTree =
     Nil
@@ -18,7 +18,7 @@ in
 end;
 
 
-/* Part 2 */
+(* Part 2 *)
 
 local
   fun depth Nil = 0
@@ -63,19 +63,4 @@ in
        EQUAL   => Br ((a,b),left,right)
       |LESS    => balance(br(v, insert((a,b),left), right))
       |GREATER => balance(br(v, left, insert((a,b), right)))
-end;
-
-
-fun insert ((a : int ,b),Nil) = Br ((a,b),Nil,Nil)
-  | insert (Nil,item) = item
-  | insert ((a,b), (Br (v,left,right))) =
-  let
-    val node = (a,b)
-    val cmp = Int.compare
-    fun compare (k1,_) (k2,_) = cmp (k1, k2)
-  in
-    case compare node v of
-      EQUAL => Br (node,left,right)
-      GREATER => Br (v,left, insert (node, right))
-      LESS => Br (v, insert (node,left), right)
 end;

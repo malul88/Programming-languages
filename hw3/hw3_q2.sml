@@ -1,3 +1,6 @@
+/* Michael Malul 316153865 michaelmalul@campus.technion.ac.il
+   Omer Gino 205416209 omergino@campus.technion.ac.il */
+
 /* Part 1 */
 
 fun to_binary y =

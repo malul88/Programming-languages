@@ -1,7 +1,7 @@
 /* Michael Malul 316153865 michaelmalul@campus.technion.ac.il
    Omer Gino 205416209 omergino@campus.technion.ac.il */
 
-/* part1 */
+(* part1 *)
 
 
 fun valAt list index =
@@ -27,7 +27,7 @@ fun sumAtIndices list indexes =
       else valAt list head  + sumAtIndices list tail
     end;
 
-/* part2 */
+(* part2 *)
 
 fun toLower s = let
    fun hlp1low (hs ,s, n) = let
@@ -59,42 +59,3 @@ fun countOccurrs (s,c)=
 
 
 fun areAnagrams (s1,s2)= (getAllOccurrs(s1) = getAllOccurrs(s2)w);
-
-/* part3 */
-
-exception Undefined;
-exception Empty;
-
-fun initEnv () (s:string)= raise Undefined;
-
-
-fun define (s:string) f a = fn str => if str=s then a
-                      else f(str);
-
-fun emptyNestedEnv () = [initEnv ()];
-
-fun pushEnv a list = a::list;
-
-fun popEnv list = tl list;
-
-fun topEnv list = hd list;
-
-fun defineNested s list a =
-  let
-    val env = topEnv(list)
-    val env = define s env a
-    val list = popEnv list
-  in
-    pushEnv env list
-  end;
-
-fun find (s:string) [] = raise Empty
-  | find s list =
-  let
-   val env = topEnv(list)
-   val tail = popEnv(list)
-  in
-    env s
-    handle Undefined => find s tail
-    handle Empty => raise Undefined
-  end;

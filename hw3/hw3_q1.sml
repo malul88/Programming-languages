@@ -1,5 +1,5 @@
-/* Michael Malul 316153865 michaelmalul@campus.technion.ac.il
-   Omer Gino 205416209 omergino@campus.technion.ac.il */
+(* Michael Malul 316153865 michaelmalul@campus.technion.ac.il
+   Omer Gino 205416209 omergino@campus.technion.ac.il *)
 
 (* Part 1 *)
 	datatype ('a, 'b) heterolist = nil
@@ -11,8 +11,8 @@ fun build4 (x, one, y, two) =
 x:::one:::y:::two:::nil;
 
 (* Part 3 *)
-val x:::one:::y:::two:::nil = build4 ("x",1,"y",2)
-val ("x",1,"y",2) = (x,one,y,two)
+val x:::one:::y:::two:::nil = build4 ("x",1,"y",2);
+val ("x",1,"y",2) = (x,one,y,two);
 
 (* Part 4 *)
 local

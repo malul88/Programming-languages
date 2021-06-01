@@ -1,5 +1,5 @@
-/* Michael Malul 316153865 michaelmalul@campus.technion.ac.il
-   Omer Gino 205416209 omergino@campus.technion.ac.il */
+(* Michael Malul 316153865 michaelmalul@campus.technion.ac.il
+   Omer Gino 205416209 omergino@campus.technion.ac.il *)
 
 (* part1 *)
 
@@ -29,19 +29,25 @@ fun sumAtIndices list indexes =
 
 (* part2 *)
 
-fun toLower s = let
-   fun hlp1low (hs ,s, n) = let
-      fun rplace c = let
-          fun chkCase (c:char) = if c > #"z" orelse c < #"a" then ((ord c)       -(ord #"A") + (ord #"a")) else ord c
-           in
-           chr(chkCase(c))
-           end;
-      in
+fun toLower s =
+  let
+   fun hlp1low (hs ,s, n) =
+    let
+      fun rplace c =
+        let
+          fun chkCase (c:char) = if c > #"z" orelse c < #"a" then ((ord c) -(ord #"A") + (ord #"a")) else ord c
+        in
+          chr(chkCase(c))
+        end
+    in
       if (size(s)>n) then hlp1low(hs^(str(rplace(String.sub(s,n)))),s,n+1)  else hs
-       end;
+    end
+    val empt = ""
  in
-hlp1low(“”,s,0)
+  hlp1low(empt,s,0)
 end;
+
+
 
 
 fun countOccurrs (s,c)=
@@ -56,6 +62,17 @@ fun countOccurrs (s,c)=
     counter(0)
   end;
 
+fun getAllOccurrs s=
+  let
+    fun recL (l,i) =
+      let
+        fun tup c= (c, countOccurrs(s,c))
+        fun inc i = chr((ord #"a") +i)
+      in
+        if i< 0 then l else recL(tup(inc(i))::l,i-1)
+      end
+  in
+    recL([],26)
+end;
 
-
-fun areAnagrams (s1,s2)= (getAllOccurrs(s1) = getAllOccurrs(s2)w);
+fun areAnagrams (s1,s2)= (getAllOccurrs(s1) = getAllOccurrs(s2));
